@@ -253,12 +253,36 @@ def refreshData(pair):
     connection.close()
     
 ###############################################################################
+""" 
+         MENU
+"""
+def Menu():
+    crypto=available_crypto()
+    choix=0
+    n=1
+    print("\n                               ##################################\n")
+    print("                                      Cryptocurrencies: \n")
+    print("                               ##################################\n")
+    for x in crypto[0]:
+        print(str(n)+") "+ x+" : "+crypto[1][crypto[0].index(x)])
+        n=n+1
+            
+    print("                           ##########################################\n")
+    print("price of BTC-USD: \n1)Ask\n2)Bid ")    
+    choix=input("Tapez votre choix: ")
+    if(choix==str(1)):
+        print(getDepth(direction='ask', pair ='BTC-USD'))
+    if (choix==str(2)):
+        print(getDepth(direction='bid', pair ='BTC-USD'))
+###############################################################################
+
 """
 Launch programs
 """
 
 #print(order_book('BTC-USD',str(2)))    #Uncomment to see
 
+Menu()
 """
 We join a preview of database for BTC-USD on 5m in our github
 """
@@ -268,29 +292,6 @@ insert_data_in_candle('Coinbase_BTCUSD_5m','BTC-USD',300)  #300=5m
 """refreshData('BTCUSD')   """                                              
 
 
-""" 
-         MENU
-"""
-def Menu():
-    crypto=available_crypto()
-    choix=0
-    while(choix!=3):
-        n=1
-        print("\n                               ##################################\n")
-        print("                                      Cryptocurrencies: \n")
-        print("                               ##################################\n")
-        print("Which one do you want to use?\n")
-        for x in crypto[0]:
-            print(str(n)+") "+ x+" : "+crypto[1][crypto[0].index(x)])
-            n=n+1
-            
-        print("                           ##########################################\n")
-        print("1)Ask or 2)Bid price of BTC-USD")    
-        choix=input("Tapez votre choix: ")
-        if(choix==str(1)):
-            print(getDepth(direction='ask', pair ='BTC-USD'))
-        if (choix==str(2)):
-            print(getDepth(direction='bid', pair ='BTC-USD'))
 
             
             
